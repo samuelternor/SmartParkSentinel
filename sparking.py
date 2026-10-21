@@ -1,3 +1,4 @@
+from database import create_database, add_vehicle, get_vehicles
 from datetime import datetime, timedelta
 
 def check_vehicle(plate, hours_parked, stolen_plates):
@@ -17,6 +18,7 @@ def check_vehicle(plate, hours_parked, stolen_plates):
 
 
 if __name__ == "__main__":
+    create_database()
     stolen_plates = {"ABC123", "XYZ789"}
 
     print("SMARTPARK SENTINEL")
@@ -31,4 +33,12 @@ if __name__ == "__main__":
 
     for plate, hours in vehicles:
         status = check_vehicle(plate, hours, stolen_plates)
+        add_vehicle(plate, hours, status)
         print(f"Plate: {plate or 'UNKNOWN'} | {status}")
+
+        
+    print("\nVEHICLES SAVED IN DATABASE")
+    print("--------------------------")
+
+    for vehicle in get_vehicles():
+        print(f"ID: {vehicle[0]} | Plate: {vehicle[1] or 'UNKNOWN'} | Hours: {vehicle[2]} | Status: {vehicle[3]}")
