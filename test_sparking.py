@@ -12,3 +12,8 @@ def test_long_parking():
 
 def test_normal_vehicle():
     assert check_vehicle("PARK123", 5, set()) == "Vehicle status: Normal"
+
+    
+def test_parking_exactly_24_hours():
+    assert check_vehicle("TEST123", 24, set()) == "WARNING: Vehicle parked too long"
+
