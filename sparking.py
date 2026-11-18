@@ -17,6 +17,13 @@ def check_vehicle(plate, hours_parked, stolen_plates):
     return "Vehicle status: Normal"
 
 
+def process_vehicles(vehicles, stolen_plates):
+    for plate, hours in vehicles:
+        status = check_vehicle(plate, hours, stolen_plates)
+        add_vehicle(plate, hours, status)
+        print(f"Plate: {plate or 'UNKNOWN'} | {status}")
+
+
 if __name__ == "__main__":
     create_database()
     stolen_plates = {"ABC123", "XYZ789"}
@@ -31,12 +38,8 @@ if __name__ == "__main__":
         ("PARK123", 5),
     ]
 
-    for plate, hours in vehicles:
-        status = check_vehicle(plate, hours, stolen_plates)
-        add_vehicle(plate, hours, status)
-        print(f"Plate: {plate or 'UNKNOWN'} | {status}")
+    process_vehicles(vehicles, stolen_plates)
 
-        
     print("\nVEHICLES SAVED IN DATABASE")
     print("--------------------------")
 
